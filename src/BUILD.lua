@@ -37,7 +37,7 @@ local optabgen = cc.binary {
 -- Run optabgen
 rule {
     inputs = {optabgen:path()},
-    task = {"bbdeps", path.join("..", optabgen:path())},
+    task = {path.join("..", optabgen:path())},
     cwd = SCRIPT_DIR,
     outputs = {
         "src/cdxxx.c", "src/debtab.c", "src/elxxx.c", "src/fltables.c",
@@ -120,6 +120,10 @@ local frontend_srcs = {
 d.binary {
     name = "dmd",
     deps = {"root", "glue", "backend"},
+    src_deps = {
+        ["dinifile.d"] = {"SYSCONFDIR.imp"},
+        ["globals.d"]  = {"verstr.h"},
+    },
     imports = {"."},
     string_imports = {"."},
     srcs = table.join(
