@@ -20,7 +20,7 @@ local idgen = d.binary {
 -- Run idgen
 rule {
     inputs = {idgen:path()},
-    task = {path.join("..", idgen:path())},
+    task = {{path.join("..", idgen:path())}},
     cwd = SCRIPT_DIR,
     outputs = {path.join(SCRIPT_DIR, "id.d"), path.join(SCRIPT_DIR, "id.h")},
 }
@@ -37,7 +37,7 @@ local optabgen = cc.binary {
 -- Run optabgen
 rule {
     inputs = {optabgen:path()},
-    task = {path.join("..", optabgen:path())},
+    task = {{path.join("..", optabgen:path())}},
     cwd = SCRIPT_DIR,
     outputs = {
         "src/cdxxx.c", "src/debtab.c", "src/elxxx.c", "src/fltables.c",
